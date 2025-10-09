@@ -3,17 +3,14 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useNavigation,
   Links
 } from "react-router";
 
 import type { Route } from "./+types/root";
-// import './styles/index.sass';
+import Header from "./components/header";
+import './../styles/index.sass';
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const navigation = useNavigation();
-  // It Check if the user is navigation.
-  const isPending = navigation.state !== "idle";
   return (
     <html lang="en">
       <head>
@@ -22,8 +19,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {isPending && <HydrateFallback />}
-        <main>
+        <Header />
+        <main className='container'>
           {children}
           <ScrollRestoration />
           <Scripts />

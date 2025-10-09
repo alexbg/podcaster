@@ -1,0 +1,26 @@
+@use './mixin/media'
+  
+.container
+  margin: 0 0.5rem
+
+  @include media.media-640
+    padding-left: 0.25rem
+    padding-right: 0.25rem
+
+  @include media.media-1024
+    max-width: 1024px
+    margin: 0
+  
+  @include media.media-1280
+    max-width: 1280px
+
+  &__header
+    display: flex
+    flex: 1
+    justify-content: space-between
+    align-items: center
+    @include media.media-1024
+      width: 1024px
+
+    @include media.media-1280
+      width: 1280px

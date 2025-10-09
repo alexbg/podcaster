@@ -13,7 +13,8 @@ export default defineConfig([
       js.configs.recommended,
       tseslint.configs.recommended,
       reactHooks.configs['recommended-latest'],
-      reactRefresh.configs.vite,
+      // With React Router, we don't need it, and cause problems
+      // reactRefresh.configs.vite,
     ],
     languageOptions: {
       ecmaVersion: 2020,
