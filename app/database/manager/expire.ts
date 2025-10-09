@@ -1,4 +1,4 @@
-import db from './../db';
+import db from '../db';
 
 interface Expire {
   id: string;
@@ -8,15 +8,15 @@ interface Expire {
 class ExpireManager {
   constructor(){}
 
-  refresh(id: string) {
-    const nextDay = new Date();
-    nextDay.setDate(nextDay.getDate() + 1);
-    db.expire.add({id, expireAt: nextDay})
+  async createRefresh(id: string, staleTime: Date) {
+    await db.expire.delete(id);
+    return db.expire.add({id, expireAt: staleTime});
   }
 
-  async checkRefresh(id: string) {
+  async hasToRefresh(id: string) {
     const expire = await db.expire.get(id);
     if (expire && expire.expireAt > new Date()) {
+      console.log('ES FALSE');
       return false;
     }
     return true;
