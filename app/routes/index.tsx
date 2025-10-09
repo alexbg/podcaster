@@ -1,3 +1,9 @@
+import { NavLink } from "react-router";
+
 export default function Index() {
-  return <>Este es el index</>
+  return (
+    <>
+      <NavLink to={'/detail/10'}>Patata</NavLink>
+    </>
+  )
 }
