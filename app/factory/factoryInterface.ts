@@ -4,5 +4,5 @@ export interface Podcast{
   summary: string;
   smallImage: string;
   image: string;
-  id: string;
+  podcasterId: string;
 }

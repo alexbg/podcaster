@@ -26,6 +26,15 @@ class PodcasterManager {
       console.error(error);
     }
   }
+
+  async getAll() {
+    try {
+      // TODO organize the Podcaster and Factory podcasts, because they have to be the same and aren't
+      return await db.podcaster.where('podcasterId').equals('podcasts').toArray();
+    } catch(error) {
+      console.error(error);
+    }
+  }
 }
 
 const managePodcaster = new PodcasterManager();
