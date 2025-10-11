@@ -8,6 +8,6 @@ export function podcastFactory(apiPodcast: Entry): Podcast {
     summary: apiPodcast.summary.label,
     smallImage: apiPodcast['im:image'][0].label,
     image: apiPodcast['im:image'][2].label,
-    id: apiPodcast.id.label
+    id: apiPodcast.id.attributes['im:id']
   }
 }

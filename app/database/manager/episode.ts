@@ -1,8 +1,8 @@
 import db from '../db';
 
 interface Episode {
-  episodeId: number;
-  podcasterId: number;
+  id: number;
+  podcastId: number;
   duration: string;
   title: string;
   description: string;
@@ -22,15 +22,23 @@ class EpisodeManager {
 
   async bulkAddEpisodes(episodes: Episode[]) {
     try {
+      // debugger;
+      // const all = await this.getEpisodes();
+      // if (all) {
+      //   const ids = all.map((data) => {
+      //     return data.id;
+      //   });
+      //   await db.podcast.bulkDelete(ids);
+      // }
       await db.episode.bulkAdd(episodes);
     } catch (error) {
       console.error(error);
     }
   }
 
-  async getEpisodes(podcasterId: number): Promise<Episode[] | undefined> {
+  async getEpisodes(podcastId: number): Promise<Episode[] | undefined> {
     try {
-      return db.episode.where('podcasterId').equals(podcasterId).toArray();
+      return db.episode.where('podcastId').equals(podcastId).toArray();
     } catch (error) {
       console.error(error);
       return undefined;

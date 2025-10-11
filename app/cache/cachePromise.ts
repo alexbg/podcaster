@@ -5,6 +5,10 @@ interface PromiseInfo {
   staleTime?: Date
 }
 
+/**
+ * Save in memory the promise, so it can be used later
+ * 
+ */
 class CachePromise {
   private cache = new Map<string, PromiseInfo>();
   private limit = 5;
@@ -14,6 +18,17 @@ class CachePromise {
     }
   }
 
+  /**
+   * Load or create a new promise which return the data from fetchMethod
+   * - If it is in the cache, it return a PromiseInfo, it PromiseInfo has the promise
+   * - If it is in the cache and need to refresh because the staleTime is older than today, it call freshMethod again
+   * and save it in the database
+   * - If it isn't in the cache, search the staleTime in the database and create a new PromiseInfo with a new Promise
+   * @param key string
+   * @param fetchMethod (refresh: boolean) => Promise<T>
+   * @param staleTime Date
+   * @returns 
+   */
   loadOrCreate<T>(
     key: string,
     fetchMethod: () => Promise<T>,
@@ -24,6 +39,7 @@ class CachePromise {
       debugger;
       return this.createPromiseWithCheckRefresh(key, fetchMethod, staleTime);
     } else {
+      debugger;
       if (promiseInfo.staleTime && promiseInfo.staleTime < new Date()) {
         debugger;
         return this.createPromise(key, fetchMethod, staleTime, true);
@@ -32,6 +48,14 @@ class CachePromise {
     }
   }
 
+  // TODO merge the two method in one.
+  /**
+   * It return a PromiseInfo with a new Promise and check if the cache is expired
+   * @param key 
+   * @param fetchMethod 
+   * @param staleTime 
+   * @returns 
+   */
   createPromiseWithCheckRefresh(key: string, fetchMethod: (refresh: boolean) => Promise<T>, staleTime: Date) {
     const promiseInfo: PromiseInfo = {promise: new Promise<T>((resolve, reject) => {
 

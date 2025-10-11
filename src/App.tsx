@@ -1,6 +1,6 @@
 import { Suspense, use, useEffect, useState } from 'react';
 import './App.css';
-import managePodcaster from '../app/database/manager/podcaster';
+import managePodcast from '../app/database/manager/podcast';
 import db from '../app/database/db';
 import episodeManager from '../app/database/manager/episode';
 import useCheck from '../app/hooks/useCheck';

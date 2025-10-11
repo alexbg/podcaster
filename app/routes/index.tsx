@@ -14,7 +14,7 @@ import useLoadData from "~/hooks/useLoadData";
 function Patata() {
   const prueba = useLoadData<Podcast[]>({key: 'podcasts', fetchMethod: podcastsApi});
   if (prueba) {
-    const patata = use(prueba.promise);
+    const patata = use(prueba);
     console.log(patata);
   }
   return <div>Cargado</div>
